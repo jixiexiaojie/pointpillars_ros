@@ -1,0 +1,21 @@
+<launch>
+    <!-- <node pkg="rosbag" type="play" name="player" output="log" args="-l /home/lenovo/Downloads/3Ddetection/pointpillars-main/pointpillars_ws/src/det3d/2023-05-16-18-36-02.bag"/> -->
+    <!-- <node pkg="rosbag" type="play" name="player" output="log" args="-l /media/lenovo/zch/changjing/2023-06-28-18-08-30.bag"/> -->
+    <!-- <node pkg="rosbag" type="play" name="player" output="log" args="-l /media/lenovo/T7/2023-05-15-18-06-52.bag"/> -->
+    <node pkg="rosbag" type="play" name="player" output="log" args="-l /home/lenovo/Downloads/3Ddetection/pointpillars-main/pointpillars_ws/src/det3d/2023-07-27-12-34-38.bag"/>
+    <!-- <node pkg="rosbag" type="play" name="player" output="log" args="-l /media/lenovo/T7/2023-07-18-22-40-18.bag"/> -->
+    <!-- <node pkg="at128_jpc" type="at128_jpc" name="at128_jpc" output="screen"/> -->
+    <!-- <node pkg="rosbag" type="play" name="player" output="log" args="-l /home/lenovo/Downloads/3Ddetection/data/2023-07-27-12-34-38.bag"/> -->
+    <!-- <node pkg="rosbag" type="play" name="player" output="log" args="-l /home/lenovo/Downloads/3Ddetection/data/2022-01-01_0003.bag"/> -->
+    <node pkg="det3d" type="det3d" name="det3d" output="screen">
+        <env name="ROSCONSOLE_CONFIG_FILE" value="$(find det3d)/../../config/rosconsole.conf"/>
+        <!-- <param name="topic" value="/rslidar_points"/> -->
+        <!-- <param name="topic" value="/pts_obstacle"/> -->
+        <!-- <param name="topic" value="/hesai/pandar_points"/> -->
+        <param name="topic" value="/camera/depth/color/points"/>
+        <param name="result_topic" value="/rslidar_points/result"/>
+        <param name="model_path" value="$(find det3d)/model/pointpillar.onnx"/>
+        <param name="score_threshold" value="0.8"/>
+    </node>
+    <node pkg="rviz" type="rviz" name="rviz"/>
+</launch>
